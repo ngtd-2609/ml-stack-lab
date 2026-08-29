@@ -58,6 +58,6 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -f docker/Dockerfile \
+            -f docker/Dockerfile.ci \
             -t ml-stack-lab:ci \
             .

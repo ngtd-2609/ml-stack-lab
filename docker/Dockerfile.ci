@@ -1,0 +1,19 @@
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+COPY src ./src
+
+RUN pip install --no-cache-dir \
+    fastapi \
+    uvicorn \
+    pandas \
+    scikit-learn \
+    joblib
+
+ENV PYTHONPATH=/app/src
+
+CMD ["python", "-c", "import ml_stack_lab; print('Docker CI image OK')"]
