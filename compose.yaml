@@ -1,0 +1,5 @@
+services:
+  app:
+    image: ml-stack-lab:dev
+    gpus: all
+    working_dir: /app
