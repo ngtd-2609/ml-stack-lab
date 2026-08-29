@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+
+      - name: Create virtual environment
+        run: uv venv --python 3.12
+
+      - name: Install CI dependencies
+        run: |
+          uv pip install \
+            pytest \
+            ruff \
+            fastapi \
+            httpx \
+            pandas \
+            scikit-learn \
+            joblib
+
+      - name: Ruff
+        run: uv run --no-sync ruff check src tests
+
+      - name: Pytest
+        env:
+          PYTHONPATH: src
+        run: uv run --no-sync pytest
