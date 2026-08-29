@@ -37,7 +37,8 @@ jobs:
             httpx \
             pandas \
             scikit-learn \
-            joblib
+            joblib \
+            prometheus-client
 
       - name: Ruff
         run: uv run --no-sync ruff check src tests
