@@ -28,3 +28,10 @@ def test_predict():
 
     assert response.status_code == 200
     assert response.json()["prediction"] == pytest.approx(40.0)
+
+
+def test_metrics():
+    response = client.get("/metrics")
+
+    assert response.status_code == 200
+    assert "python_info" in response.text

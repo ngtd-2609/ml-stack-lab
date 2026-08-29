@@ -19,6 +19,7 @@ dependencies = [
     "optuna>=4.9.0",
     "pandas>=2.2,<3",
     "plotly>=7.0.0",
+    "prometheus-client>=0.26.0",
     "scikit-learn>=1.9.0",
     "scipy>=1.18.1",
     "seaborn>=0.13.2",
