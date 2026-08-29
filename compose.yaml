@@ -1,5 +1,19 @@
 services:
   app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     image: ml-stack-lab:dev
     gpus: all
     working_dir: /app
+    command:
+      - uvicorn
+      - ml_stack_lab.api.main:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./artifacts:/app/artifacts:ro
