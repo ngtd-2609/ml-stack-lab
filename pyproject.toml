@@ -9,6 +9,7 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "catboost>=1.2.10",
+    "fastapi>=0.141.1",
     "ipykernel>=7.3.0",
     "jupyterlab>=4.6.3",
     "lightgbm>=4.7.0",
@@ -26,6 +27,7 @@ dependencies = [
     "torch>=2.13.0",
     "torchaudio>=2.11.0",
     "torchvision>=0.28.0",
+    "uvicorn[standard]>=0.52.4",
     "xgboost>=3.4.1",
 ]
 
