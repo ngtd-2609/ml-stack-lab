@@ -46,3 +46,18 @@ jobs:
         env:
           PYTHONPATH: src
         run: uv run --no-sync pytest
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            -f docker/Dockerfile \
+            -t ml-stack-lab:ci \
+            .
