@@ -13,3 +13,6 @@ wheels/
 mlflow.db
 mlruns/
 mlartifacts/
+
+# Grafana local backups
+monitoring/backups/
