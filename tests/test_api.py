@@ -1,3 +1,4 @@
+import pytest
 from fastapi.testclient import TestClient
 
 from ml_stack_lab.api.main import app
@@ -22,8 +23,8 @@ def test_health():
 def test_predict():
     response = client.post(
         "/predict",
-        json={"features": [1.0, 2.0, 3.0]},
+        json={"feature": 4.0},
     )
 
     assert response.status_code == 200
-    assert response.json() == {"prediction": 6.0}
+    assert response.json()["prediction"] == pytest.approx(40.0)

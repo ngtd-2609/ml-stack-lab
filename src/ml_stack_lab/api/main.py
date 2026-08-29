@@ -1,3 +1,7 @@
+from pathlib import Path
+
+import joblib
+import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -6,9 +10,14 @@ app = FastAPI(
     version="0.1.0",
 )
 
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+MODEL_PATH = PROJECT_ROOT / "artifacts" / "baseline_model.joblib"
+
+model = joblib.load(MODEL_PATH)
+
 
 class PredictionRequest(BaseModel):
-    features: list[float]
+    feature: float
 
 
 class PredictionResponse(BaseModel):
@@ -27,6 +36,10 @@ def health():
 
 @app.post("/predict", response_model=PredictionResponse)
 def predict(request: PredictionRequest):
-    prediction = sum(request.features)
+    features = pd.DataFrame(
+        [{"feature": request.feature}],
+    )
 
-    return PredictionResponse(prediction=prediction)
+    prediction = model.predict(features)[0]
+
+    return PredictionResponse(prediction=float(prediction))
